@@ -1,4 +1,4 @@
-class ClassroomLightingCalculations {
+class ClassroomLightingAssessmentV2 {
   //Declaring instance variables
   //Luke:
   private String school;
