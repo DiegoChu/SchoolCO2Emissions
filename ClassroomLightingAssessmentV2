@@ -1,62 +1,63 @@
 class ClassroomLightingAssessmentV2 {
-  //declare instance variables
+  //Declaring instance variables
   //Luke:
-  private int numLightbulbs;
-  private int wattage;
+  private String school;
+  private int lights;
+  private int watts;
   private int hoursPerDay;
-  private int schoolDaysPerMonth;
-  private int schoolDaysPerYear;
-  private double co2ePerKwh;
-  private int numStudents;
-
-  //create constructor for classroom light
+  private int daysPerMonth;
+  private int monthsPerYear;
+  private double emissions;
+  private int students;
+  
+  //Creating constructor for classroom lights
   //Matias:
-  public ClassroomLightingAssessmentV2(int numLightbulbs, int wattage, int hoursPerDay, int schoolDaysPerMonth, int schoolDaysPerYear, double co2ePerKwh, int numStudents) {
-    this.numLightbulbs = numLightbulbs;
-    this.wattage = wattage;
-    this.hoursPerDay = hoursPerDay;
-    this.schoolDaysPerMonth = schoolDaysPerMonth;
-    this.schoolDaysPerYear = schoolDaysPerYear;
-    this.co2ePerKwh = co2ePerKwh;
-    this.numStudents = numStudents;
+  public ClassroomLightingAssessmentV2(String schoolName, int numLightbulbs, int wattage, int schoolHoursPerDay, int schoolDaysPerMonth, int schoolMonthsPerYear, double co2ePerKwh, int numStudents) {
+    school = schoolName;
+    lights = numLightbulbs;
+    watts = wattage;
+    hoursPerDay = schoolHoursPerDay;
+    daysPerMonth = schoolDaysPerMonth;
+    monthsPerYear = schoolMonthsPerYear;
+    emissions = co2ePerKwh;
+    students = numStudents;
+    
   }
-
-  //create getter methods
+  
+  //Creating calculations for getter methods
   //Diego:
-  public int getNumLightbulbs() {
-    return numLightbulbs;
+  public String getSchoolName() {
+    return school;
   }
-
-  public int getWattage() {
-    return wattage;
+  
+  public double getKwhPerMonth() {
+    return lights * watts / 1000 * hoursPerDay * daysPerMonth;
   }
-
-  public int getHoursPerDay() {
-    return hoursPerDay;
+  
+  public double getKwhPerYear() {
+    return lights * watts / 1000 * hoursPerDay * daysPerMonth * monthsPerYear;
   }
-
-  public int getSchoolDaysPerMonth() {
-    return schoolDaysPerMonth;
+  
+  public double getEmissionsPerYear() {
+    return lights * watts / 1000 * hoursPerDay * daysPerMonth * monthsPerYear * emissions;
   }
-
-  public int getSchoolDaysPerYear() {
-    return schoolDaysPerYear;
+  
+  public double getEmissionsPerStudent() {
+    return lights * watts / 1000 * hoursPerDay * daysPerMonth * monthsPerYear * emissions / students;
   }
-
-  public double getCo2ePerKwh() {
-    return co2ePerKwh;
+  
+  public double getNumTrees() {
+    return lights * watts / 1000 * hoursPerDay * daysPerMonth * monthsPerYear * emissions /12;
   }
-
-  public int getNumStudents() {
-    return numStudents;
-  }
+  
   //Matias, Diego, Luke
-  public String toString(Double kwhPerMonth, Double kwhPerYear, Double kgCo2ePerYear, Double kgCo2ePerStudentPerYear, int numTrees){
-    return "Electricity used in classroom for lighting (kWh/month): " + kwhPerMonth + "\n" + 
-               "Electricity used in classroom for lighting (kWh/year): " + kwhPerYear + "\n" + 
-               "Yearly GHG emissions produced by classroom lights (kg CO2e/year): " + kgCo2ePerYear + "\n" +
-               "Yearly GHG emissions produced by classroom lights per student (kg CO2e/student/year): " + kgCo2ePerStudentPerYear + "\n" +
-               "Number of trees needed to absorb the emissions: " + numTrees;
-
+  public String toString(){
+    return "School Name: " + getSchoolName() + "\n" +
+      "Electricity used in classroom for lighting (kWh/month): " + getKwhPerMonth() + "\n" + 
+      "Electricity used in classroom for lighting (kWh/year): " + getKwhPerYear() + "\n" + 
+      "Yearly GHG emissions produced by classroom lights (kg CO2e/year): " + getEmissionsPerYear() + "\n" +
+      "Yearly GHG emissions produced by classroom lights per student (kg CO2e/student/year): " + getEmissionsPerStudent() + "\n" +
+      "Number of trees needed to absorb the emissions: " + getNumTrees();
+    
   }
 }
